@@ -59,10 +59,8 @@ def compare_images_in_folder(render_dir, gt_dir):
         # 진행 상황 출력
         print(f"Processed {img_name}: PSNR={psnr_value:.4f}, SSIM={ssim_value:.4f}, LPIPS={lpips_value:.4f}")
 
-    # 평균 결과 출력
-    print(f"\nAverage PSNR: {np.mean(psnr_values):.4f}")
-    print(f"Average SSIM: {np.mean(ssim_values):.4f}")
-    print(f"Average LPIPS: {np.mean(lpips_values):.4f}")
+    # 평균 결과 반환
+    return np.mean(psnr_values), np.mean(ssim_values), np.mean(lpips_values)
 
 # 메인 실행 함수
 def main(m):
@@ -70,13 +68,18 @@ def main(m):
     test_render_dir = os.path.join(m, 'test', 'ours_10000', 'renders')
     test_gt_dir = os.path.join(m, 'test', 'ours_10000', 'gt')
     print("\nComparing images in test/ours_10000:")
-    compare_images_in_folder(test_render_dir, test_gt_dir)
+    test_psnr, test_ssim, test_lpips = compare_images_in_folder(test_render_dir, test_gt_dir)
 
     # train/ours_10000 폴더 비교
     train_render_dir = os.path.join(m, 'train', 'ours_10000', 'renders')
     train_gt_dir = os.path.join(m, 'train', 'ours_10000', 'gt')
     print("\nComparing images in train/ours_10000:")
-    compare_images_in_folder(train_render_dir, train_gt_dir)
+    train_psnr, train_ssim, train_lpips = compare_images_in_folder(train_render_dir, train_gt_dir)
+
+    # 최종 평균 결과 출력
+    print("\nFinal Results:")
+    print(f"Test Set - Average PSNR: {test_psnr:.4f}, Average SSIM: {test_ssim:.4f}, Average LPIPS: {test_lpips:.4f}")
+    print(f"Train Set - Average PSNR: {train_psnr:.4f}, Average SSIM: {train_ssim:.4f}, Average LPIPS: {train_lpips:.4f}")
 
 # 실행 인자로 경로를 받아서 실행
 if __name__ == "__main__":
