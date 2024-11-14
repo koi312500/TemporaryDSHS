@@ -67,14 +67,14 @@ def compare_images_in_folder(render_dir, gt_dir):
 # 메인 실행 함수
 def main(m):
     # test/ours_10000 폴더 비교
-    test_render_dir = os.path.join(m, 'test', 'ours_10000')
-    test_gt_dir = os.path.join(m, 'gt')
+    test_render_dir = os.path.join(m, 'test', 'ours_10000', 'renders')
+    test_gt_dir = os.path.join(m, 'test', 'ours_10000', 'gt')
     print("\nComparing images in test/ours_10000:")
     compare_images_in_folder(test_render_dir, test_gt_dir)
 
     # train/ours_10000 폴더 비교
-    train_render_dir = os.path.join(m, 'train', 'ours_10000')
-    train_gt_dir = os.path.join(m, 'gt')
+    train_render_dir = os.path.join(m, 'train', 'ours_10000', 'renders')
+    train_gt_dir = os.path.join(m, 'train', 'ours_10000', 'gt')
     print("\nComparing images in train/ours_10000:")
     compare_images_in_folder(train_render_dir, train_gt_dir)
 
